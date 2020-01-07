@@ -1,114 +1,168 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, {Component} from 'react';
+import {View, Text, StyleSheet } from 'react-native';
+import FusionCharts from 'react-native-fusioncharts';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+    this.state = {
+      type: 'msline',
+      width: '100%',
+      height: '100%',
+      dataFormat: 'json',
+      dataSource: {
+        chart: {
+          caption: 'Reach of Social Media Platforms amoung youth',
+          yaxisname: '% of youth on this platform',
+          subcaption: '2012-2016',
+          showhovereffect: '1',
+          numbersuffix: '%',
+          drawcrossline: '1',
+          plottooltext: '<b>$dataValue</b> of youth were on $seriesName',
+          theme: 'fusion',
+        },
+        categories: [
+          {
+            category: [
+              {
+                label: '2012',
+              },
+              {
+                label: '2013',
+              },
+              {
+                label: '2014',
+              },
+              {
+                label: '2015',
+              },
+              {
+                label: '2016',
+              },
+            ],
+          },
+        ],
+        dataset: [
+          {
+            seriesname: 'Facebook',
+            data: [
+              {
+                value: '62',
+              },
+              {
+                value: '64',
+              },
+              {
+                value: '64',
+              },
+              {
+                value: '66',
+              },
+              {
+                value: '78',
+              },
+            ],
+          },
+          {
+            seriesname: 'Instagram',
+            data: [
+              {
+                value: '16',
+              },
+              {
+                value: '28',
+              },
+              {
+                value: '34',
+              },
+              {
+                value: '42',
+              },
+              {
+                value: '54',
+              },
+            ],
+          },
+          {
+            seriesname: 'LinkedIn',
+            data: [
+              {
+                value: '20',
+              },
+              {
+                value: '22',
+              },
+              {
+                value: '27',
+              },
+              {
+                value: '22',
+              },
+              {
+                value: '29',
+              },
+            ],
+          },
+          {
+            seriesname: 'Twitter',
+            data: [
+              {
+                value: '18',
+              },
+              {
+                value: '19',
+              },
+              {
+                value: '21',
+              },
+              {
+                value: '21',
+              },
+              {
+                value: '24',
+              },
+            ],
+          },
+        ],
+      },
+    };
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+    this.libraryPath = {uri: 'file:///android_asset/fusioncharts.html'};
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.heading}>
+          FusionCharts Integration with React Native
+        </Text>
+        <View style={styles.chartContainer}>
+          <FusionCharts
+            type={this.state.type}
+            width={this.state.width}
+            height={this.state.height}
+            dataFormat={this.state.dataFormat}
+            dataSource={this.state.dataSource}
+            libraryPath={this.libraryPath} // set the libraryPath property
+          />
+        </View>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    flex: 1,
+    padding: 10,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  heading: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 10,
   },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  chartContainer: {
+    height: 500,
   },
 });
-
-export default App;

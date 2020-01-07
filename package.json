@@ -7,11 +7,16 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean:build:android": "rm -rf android/app/build",
+    "prod:android": "npm run clean:build:android  && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
+    "fusioncharts": "^3.15.0-sr.1",
     "react": "16.9.0",
-    "react-native": "0.61.5"
+    "react-native": "0.61.5",
+    "react-native-fusioncharts": "^4.1.1",
+    "react-native-webview": "^8.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
