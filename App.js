@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet } from 'react-native';
+import {SafeAreaView, View,Text, StyleSheet, Platform} from 'react-native';
 import FusionCharts from 'react-native-fusioncharts';
 
 export default class App extends Component {
@@ -128,12 +128,16 @@ export default class App extends Component {
       },
     };
 
-    this.libraryPath = {uri: 'file:///android_asset/fusioncharts.html'};
+    this.libraryPath = Platform.select({
+      // Specify fusioncharts.html file location
+      ios: require('./assets/fusioncharts.html'),
+      android: {uri: 'file:///android_asset/fusioncharts.html'},
+    });
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.heading}>
           FusionCharts Integration with React Native
         </Text>
@@ -147,7 +151,7 @@ export default class App extends Component {
             libraryPath={this.libraryPath} // set the libraryPath property
           />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
