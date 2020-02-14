@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, Platform} from 'react-native';
+import {SafeAreaView, View, Text, StyleSheet, Platform, FlatList} from 'react-native';
 import FusionCharts from 'react-native-fusioncharts';
 
 export default class App extends Component {
@@ -9,7 +9,7 @@ export default class App extends Component {
     this.state = {
       type: 'msline',
       width: '100%',
-      height: '100%',
+      height: '50%',
       dataFormat: 'json',
       dataSource: {
         chart: {
@@ -30,6 +30,8 @@ export default class App extends Component {
           crossLineAlpha: '100',
           tooltipGrayOutColor: '#80bfff',
           theme: 'fusion',
+          bgColor: '#151E30'
+
         },
         categories: [
           {
@@ -307,9 +309,6 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={styles.heading}>
-          FusionCharts Integration with React Native
-        </Text>
         <View style={styles.chartContainer}>
           <FusionCharts
             type={this.state.type}
@@ -318,11 +317,6 @@ export default class App extends Component {
             dataFormat={this.state.dataFormat}
             dataSource={this.state.dataSource}
             libraryPath={this.libraryPath} // set the libraryPath property
-            events={{
-              onChangeCrossLine: (e) => {
-                console.log('crossLine changed', e.sender.args)
-              },
-            }}
           />
         </View>
       </SafeAreaView>
@@ -334,6 +328,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: '#151E30'
   },
   heading: {
     fontSize: 20,
