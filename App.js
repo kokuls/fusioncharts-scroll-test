@@ -30,7 +30,10 @@ export default class App extends Component {
           crossLineAlpha: '100',
           tooltipGrayOutColor: '#80bfff',
           theme: 'fusion',
-          bgColor: '#151E30'
+         // bgColor: '#151E30',
+          containerBackgroundOpacity: 0,
+          bgAlpha:0,
+          canvasbgalpha:0
 
         },
         categories: [
@@ -328,7 +331,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#151E30'
+    backgroundColor: 'red'
   },
   heading: {
     fontSize: 20,
@@ -337,5 +340,7 @@ const styles = StyleSheet.create({
   },
   chartContainer: {
     height: 500,
+    backgroundColor: 'blue',
+    padding: 20
   },
 });
